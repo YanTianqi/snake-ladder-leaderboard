@@ -1,0 +1,84 @@
+<body>
+  <h1>Welcome to the game of Snake and Ladder!</h1>
+
+  <div id="outer">
+    {{> leaderboard}}
+    <!-- allows player to roll a dice to decide number of moves -->
+
+  </div>
+
+  <div id="outer">
+    {{> map}}
+  </div>
+
+
+</body>
+
+
+
+<template name="leaderboard">
+  <div>
+    <form class="new-player">
+        <input type="text" name="text" placeholder="Type your name to join the game" />
+    </form>
+  </div>
+
+  <div class="leaderboard">
+      {{> playerList}}
+  </div>
+
+</template>
+
+<template name="playerList">
+  {{#each p in players}}
+    <div class="player">
+      <span class="name">{{p.name}}</span>
+      <span class="score">{{p.score}}</span>
+    </div>
+  {{/each}}
+
+  <div class="winner">
+    <span>Winner:</span>
+    <span>{{game_status.winner}}</span>
+  </div>
+
+  <div class="current_turn">
+    <span>Current turn:</span>
+    <span>{{game_status.current_turn}}</span>
+  </div>
+
+
+  <div class="sort_order">
+    <input type="button" class="dice" value="roll the dice"/>
+    <span class="dice_result">{{dice_number}}</span>
+  </div>
+
+  <div class="game_control">
+    <input type="button" class="start_game" value="Start Game!"/>
+    <input type="button" class="restart_game" value="New Game"/>
+  </div>
+
+
+</template>
+
+
+<template name="map">
+  {{#if gameOn}}
+    <h2> The game map </h2>
+    <h3> snake </h3>
+    {{#each p in snake}}
+      <div class="snake">
+        <span class="start">{{p.start}}</span>
+        <span class="end">{{p.end}}</span>
+      </div>
+    {{/each}}
+
+    <h3> ladder </h3>
+    {{#each q in ladder}}
+      <div class="ladder">
+        <span class="start">{{q.start}}</span>
+        <span class="end">{{q.end}}</span>
+      </div>
+    {{/each}}
+  {{/if}}
+</template>
